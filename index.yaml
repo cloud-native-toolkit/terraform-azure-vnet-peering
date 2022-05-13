@@ -1,0 +1,9 @@
+name: azure-vnet-peering
+type: terraform
+description: Module to provision vnet-peering on azure
+tags:
+  - tools
+  - devops
+versions: []
+cloudProvider: azure
+id: github.com/cloud-native-toolkit/terraform-azure-vnet-peering
