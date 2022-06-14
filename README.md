@@ -1,5 +1,5 @@
 Azure VNet Peering
-Module overview
+Module Overview
 Description
 
 Module that provisions virtual network peering on Azure.
