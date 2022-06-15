@@ -2,7 +2,6 @@ variable "resource_group_name" {
   type        = string
   description = "The name of the Azure resource group where the NAT gateway has been provisioned"
 }
-
 variable "region" {
   type        = string
   description = "The Azure location where the VNET will be installed"
