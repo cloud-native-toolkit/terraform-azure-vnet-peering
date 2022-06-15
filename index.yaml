@@ -2,8 +2,80 @@ name: azure-vnet-peering
 type: terraform
 description: Module to provision vnet-peering on azure
 tags:
-  - tools
-  - devops
-versions: []
+  - azure
+  - vnet-peering
+versions:
+  - platforms: []
+    providers:
+      - name: azurerm
+        source: hashicorp/azurerm
+    dependencies:
+      - id: resource_group
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-azure-resource-group
+            version: '>= 1.0.0'
+    variables:
+      - name: resource_group_name
+        type: string
+        description: >-
+          The name of the Azure resource group where the VNET peering has been
+          provisioned
+        moduleRef:
+          id: resource_group
+          output: name
+      - name: region
+        type: string
+        description: The Azure location where the VNET will be installed
+        scope: global
+      - name: virtual_network_name_edge
+        type: string
+        description: The name of Azure vnet
+      - name: virtual_network_name_private
+        type: string
+        description: The name of Azure vnet
+      - name: virtual_network_name_public
+        type: string
+        description: The name of Azure vnet
+      - name: address_prefixes_vnet_edge
+        type: list(string)
+        description: >-
+          List of ipv4 cidr blocks for the address prefixes (e.g.
+          ['10.1.0.0/16']). If you are providing cidr blocks then a value must
+          be provided for each of the subnets. If you don't provide cidr blocks
+          for each of the subnets then values will be generated using the
+          {ipv4_address_count} value.
+        default: []
+      - name: address_prefixes_vnet_private
+        type: list(string)
+        description: >-
+          List of ipv4 cidr blocks for the address prefixes (e.g.
+          ['10.2.0.0/16']). If you are providing cidr blocks then a value must
+          be provided for each of the subnets. If you don't provide cidr blocks
+          for each of the subnets then values will be generated using the
+          {ipv4_address_count} value.
+        default: []
+      - name: address_prefixes_vnet_public
+        type: list(string)
+        description: >-
+          List of ipv4 cidr blocks for the address prefixes (e.g.
+          ['10.3.0.0/16']). If you are providing cidr blocks then a value must
+          be provided for each of the subnets. If you don't provide cidr blocks
+          for each of the subnets then values will be generated using the
+          {ipv4_address_count} value.
+        default: []
+      - name: virtual_network_peering_edgetoprivate
+        type: string
+        description: The name of Azure vnet peering
+      - name: virtual_network_peering_privatetoedge
+        type: string
+        description: The name of Azure vnet peering
+      - name: virtual_network_peering_edgetopublic
+        type: string
+        description: The name of Azure vnet peering
+      - name: virtual_network_peering_publictoedge
+        type: string
+        description: The name of Azure vnet peering
+    version: v1.0.0
+    outputs: []
 cloudProvider: azure
 id: github.com/cloud-native-toolkit/terraform-azure-vnet-peering
